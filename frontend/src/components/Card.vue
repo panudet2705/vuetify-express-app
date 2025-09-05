@@ -5,8 +5,13 @@
   const message = ref('')
 
   onMounted(async () => {
-    const res = await api.get('/api/hello')
-    message.value = res.data.message
+    try {
+      const res = await api.get('/hello')
+      message.value = res.data.message
+    } catch (error) {
+      console.error('API error:', error)
+      message.value = 'API not working ❌'
+    }
   })
 </script>
 
